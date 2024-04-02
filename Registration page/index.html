@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        /* Basic CSS styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dce6de;
+            text-align: center;
+            margin-top: 50px;
+        }
+        form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm" onsubmit="return validateForm()">
+        <h2>Registration Form</h2>
+        <input type="text" id="username" placeholder="Username">
+        <div id="usernameError" class="error"></div>
+        <input type="password" id="password" placeholder="Password">
+        <div id="passwordError" class="error"></div>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password">
+        <div id="confirmPasswordError" class="error"></div>
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        function validateForm() {
+            // Reset error messages
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('confirmPasswordError').textContent = '';
+
+            // Get form inputs
+            var username = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate username
+            if (username === '') {
+                document.getElementById('usernameError').textContent = 'Username is required';
+                return false;
+            }
+
+            // Validate password
+            if (password === '') {
+                document.getElementById('passwordError').textContent = 'Password is required';
+                return false;
+            } else if (password.length < 6) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long';
+                return false;
+            }
+
+            // Validate confirm password
+            if (confirmPassword === '') {
+                document.getElementById('confirmPasswordError').textContent = 'Please confirm your password';
+                return false;
+            } else if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+                return false;
+            }
+
+            // If all validations pass, form submission is allowed
+            return true;
+        }
+    </script>
+</body>
+</html>
